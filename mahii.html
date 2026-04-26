@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>For My Mahii ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+
+<style>
+body {
+    margin:0;
+    text-align:center;
+    font-family:Arial;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+    overflow:hidden;
+}
+
+/* glow */
+body::before{
+    content:"";
+    position:fixed;
+    width:200%;
+    height:200%;
+    background:radial-gradient(circle,rgba(255,255,255,0.2),transparent);
+    animation:spin 8s linear infinite;
+}
+@keyframes spin {100%{transform:rotate(360deg);}}
+
+/* hearts */
+.heart{
+    position:fixed;
+    animation:fall linear infinite;
+}
+@keyframes fall{
+    from{transform:translateY(-10vh);}
+    to{transform:translateY(110vh);}
+}
+
+/* screens */
+.screen{
+    position:absolute;
+    width:100%;
+    top:40%;
+}
+
+/* card */
+.card{
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(15px);
+    padding:25px;
+    border-radius:20px;
+    width:90%;
+    max-width:400px;
+    margin:auto;
+}
+
+/* button */
+button{
+    padding:12px 20px;
+    border:none;
+    border-radius:25px;
+    background:linear-gradient(to right,#ff416c,#ff4b2b);
+    color:white;
+    font-size:16px;
+}
+
+/* slideshow */
+img{
+    width:90%;
+    max-width:250px;
+    border-radius:15px;
+    margin-top:15px;
+}
+
+/* popup */
+#popup,#overlay{display:none;}
+#overlay{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.6);
+}
+#popup{
+    position:fixed;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    background:white;
+    padding:20px;
+    border-radius:15px;
+}
+
+#noBtn{position:relative;}
+</style>
+</head>
+
+<body>
+
+<!-- PASSWORD -->
+<div id="login" class="screen">
+    <h2>Enter Password ❤️</h2>
+    <input type="password" id="pass">
+    <br><br>
+    <button onclick="checkPass()">Open 💖</button>
+</div>
+
+<!-- MAIN -->
+<div id="main" style="display:none;">
+    <h1 style="font-family:Pacifico;color:#ff2e63;">Hey Mahii ❤️</h1>
+
+    <div class="card">
+        <p id="text">Loading love... 💖</p>
+
+        <!-- slideshow -->
+        <img id="slide" src="photo1.jpg">
+    </div>
+</div>
+
+<!-- popup -->
+<div id="overlay"></div>
+<div id="popup">
+    <h2>Will you be mine forever? 💍❤️</h2>
+    <button onclick="yes()">YES 💖</button>
+    <button id="noBtn" onmouseover="runAway()">NO 😜</button>
+</div>
+
+<!-- music -->
+<audio id="music" src="https://www.fesliyanstudios.com/play-mp3/387" loop></audio>
+
+<script>
+
+// password
+function checkPass(){
+    if(document.getElementById("pass").value==="1234"){
+        document.getElementById("login").style.display="none";
+        document.getElementById("main").style.display="block";
+        startLove();
+    }
+}
+
+// hearts
+setInterval(()=>{
+    let h=document.createElement("div");
+    h.innerHTML="💖";
+    h.className="heart";
+    h.style.left=Math.random()*100+"vw";
+    h.style.fontSize=(Math.random()*20+15)+"px";
+    h.style.animationDuration=(Math.random()*3+2)+"s";
+    document.body.appendChild(h);
+    setTimeout(()=>h.remove(),5000);
+},200);
+
+// FULL MESSAGE
+let msg=`Mahii 💕 unna romba pudikum di 😘
+
+Nee ennoda life long kooda irukanum di irupaya??? 🥺❤️
+
+Nee evlo azhagu theriyuma di 😍 naa poi solla la di
+
+Vella panni 🐷💕 nee enaku venum di athuku enna venalum pannuven 💯❤️
+
+Unnoda smile la vizhuthuten di 😄💘 vella panni 🐷💖
+
+Unaku intha vella panni name cute ahh iruku di enaku pudichu iruku 😍  
+Unaku pudikum nu nenakira di 💕
+
+Naa unta pesuna romba happy aaguren di 😊💫  
+Oru naal illa oru minute kooda pesama iruka mudiyathu mahii 🥺📱  
+
+Naa unna love pannura di ❤️🔥`;
+
+// typing
+function startLove(){
+    document.getElementById("music").play();
+
+    let i=0;
+    let el=document.getElementById("text");
+    el.innerHTML="";
+
+    function type(){
+        if(i<msg.length){
+            el.innerHTML+=msg.charAt(i);
+            i++;
+            setTimeout(type,40);
+        }else{
+            setTimeout(showPopup,3000);
+        }
+    }
+    type();
+
+    startSlideshow();
+}
+
+// slideshow
+let images=["photo1.jpg","photo2.jpg","photo3.jpg"];
+let index=0;
+
+function startSlideshow(){
+    setInterval(()=>{
+        index=(index+1)%images.length;
+        document.getElementById("slide").src=images[index];
+    },2000);
+}
+
+// popup
+function showPopup(){
+    document.getElementById("overlay").style.display="block";
+    document.getElementById("popup").style.display="block";
+}
+
+function yes(){
+    alert("Love you forever Mahii ❤️😘");
+}
+
+function runAway(){
+    let btn=document.getElementById("noBtn");
+    btn.style.position="absolute";
+    btn.style.top=Math.random()*200+"px";
+    btn.style.left=Math.random()*200+"px";
+}
+
+</script>
+
+</body>
+</html>
